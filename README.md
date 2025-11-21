@@ -114,6 +114,10 @@ Luckily ROS makes this pretty easy.
 10. Source the install script: `source install/setup.bash`
 11. Now you can rerun the project using the launch script (`ros2 launch elevator_proj launch_elevator_proj.py`)
 
+# Adding images
+You will have to create the image directory and transfer image files in manually because we don't want colcon to rebuild the project every time assets change. 
+
+1. From your shell terminal: `mv <repo_root>/robot_assets ~`
 
 #TODOs
 - Document running the telop/sim project

@@ -1,3 +1,6 @@
 HRI_TOPIC = "hri"
 FEEDBACK_TOPIC = "feedback"
 TEST_TOPIC = "test"
+
+COMMAND_AFFECT_HAPPY = "happy"
+COMMAND_AFFECT_SAD = "sad"
