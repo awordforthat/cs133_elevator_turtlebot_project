@@ -48,6 +48,9 @@ The following steps (up until the project installation setup steps) are copied d
 
 # Extra Dependencies
 1. The audio code relies on ffmpeg. Install it with: `sudo apt update; sudo apt install ffmpeg`
+2. Also install pydub into the system environment (sorry, I ran out of time to get this working in a venv): 
+    - `sudo apt install python3-pip` (if you don't already have it installed)
+    - `pip3 install pydub` 
 
 
 # Installing the elevator project
