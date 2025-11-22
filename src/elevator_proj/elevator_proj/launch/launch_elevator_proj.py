@@ -6,10 +6,6 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    home = os.path.expanduser("~")
-    venv = os.path.join(home, "elevator_venv", "venv")
-    print(venv)
-
     return LaunchDescription(
         [
             Node(
