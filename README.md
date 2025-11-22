@@ -46,6 +46,10 @@ The following steps (up until the project installation setup steps) are copied d
 6. Set up your environment. You will have to do this every time you restart your computer/environment. 
     - `source /opt/ros/humble/setup.bash`
 
+# Extra Dependencies
+1. The audio code relies on ffmpeg. Install it with: `sudo apt update; sudo apt install ffmpeg`
+
+
 # Installing the elevator project
 Now that you have ROS installed, you can download and run this project.
 

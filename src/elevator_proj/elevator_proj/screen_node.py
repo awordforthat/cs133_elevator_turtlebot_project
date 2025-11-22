@@ -19,7 +19,7 @@ class ScreenNode(Node):
             String, HRI_TOPIC, self.callback, 10
         )
 
-        assets_path = os.path.expanduser("~/robot_assets")
+        assets_path = os.path.expanduser("~/robot_assets/images")
 
         self.current_image = None
         self.happy_image = cv2.imread(f"{assets_path}/happy.png")
