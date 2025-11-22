@@ -1,7 +1,13 @@
 import cv2
 import os
 
-from elevator_proj.constants import HRI_TOPIC, COMMAND_AFFECT_HAPPY, COMMAND_AFFECT_SAD
+from elevator_proj.constants import (
+    HRI_TOPIC,
+    COMMAND_AFFECT_HAPPY,
+    COMMAND_AFFECT_SAD,
+    ASSET_FOLDER,
+    IMAGES_SUBDIR,
+)
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
@@ -19,7 +25,8 @@ class ScreenNode(Node):
             String, HRI_TOPIC, self.callback, 10
         )
 
-        assets_path = os.path.expanduser("~/robot_assets/images")
+        # TODO(echarles): use path library properly
+        assets_path = os.path.expanduser(f"{ASSET_FOLDER}/{IMAGES_SUBDIR}")
 
         self.current_image = None
         self.happy_image = cv2.imread(f"{assets_path}/happy.png")

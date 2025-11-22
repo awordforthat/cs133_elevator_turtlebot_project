@@ -1,10 +1,10 @@
-
-import threading 
+import threading
 
 from elevator_proj.constants import TEST_TOPIC
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+
 
 class TestNode(Node):
     def __init__(self):
@@ -30,6 +30,6 @@ def main(args=None):
     test_node.destroy_node()
     rclpy.shutdown()
 
+
 if __name__ == "__main__":
     main()
-        
