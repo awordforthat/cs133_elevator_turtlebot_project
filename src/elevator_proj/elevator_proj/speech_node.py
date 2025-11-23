@@ -9,6 +9,8 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 from elevator_proj.constants import (
+    FEEDBACK_NONE,
+    FEEDBACK_SUCCESS,
     HRI_TOPIC,
     FEEDBACK_TOPIC,
     ASSET_FOLDER,
@@ -51,7 +53,7 @@ class SpeechNode(Node):
         is_normal = COMMAND_NORMAL in msg.data
         is_unusual = COMMAND_UNUSUAL in msg.data
 
-        response = "Done"
+        response = FEEDBACK_SUCCESS
         # These play commands are blocking.
         if is_happy and is_normal:
             play(self.happy_normal_audio)
@@ -62,7 +64,7 @@ class SpeechNode(Node):
         elif is_sad and is_unusual:
             play(self.sad_unusual_audio)
         else:
-            response = "did not play audio"
+            response = FEEDBACK_NONE
 
         feedback = String()
         feedback.data = response
