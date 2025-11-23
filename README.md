@@ -51,6 +51,19 @@ The following steps (up until the project installation setup steps) are copied d
 2. Also install pydub into the system environment (sorry, I ran out of time to get this working in a venv): 
     - `sudo apt install python3-pip` (if you don't already have it installed)
     - `pip3 install pydub` 
+3. You might need to install some pulseaudio utilities. Do this if you get errors on launch like "[ERROR] [1763922903.540994613] [audio_capture_node]: Unsupported media type."
+    - `sudo apt install pulseaudio-utils`
+
+
+# Forwarding joystick ports (Windows only)
+1. In Windows Powershell, run `winget install usbipd`
+2. Run `usbipd list`. Look for your joystick controller in the output list and note its BUSID. 
+3. Attach the joysticks to WSL with `usbipd attach --wsl --busid <BUSID>`
+    - you may need to expose the port first. If this errors, follow the prompts given to run expose the port as an admin (something like `usbipd bind --busid <BUSID>`)
+4. In WSL, install the joystick packages: 
+    - `sudo apt install joystick`
+    - `sudo modprobe joydev`
+
 
 
 # Installing the elevator project
@@ -121,8 +134,10 @@ Luckily ROS makes this pretty easy.
 10. Source the install script: `source install/setup.bash`
 11. Now you can rerun the project using the launch script (`ros2 launch elevator_proj launch_elevator_proj.py`)
 
-# Adding images
-You will have to create the image directory and transfer image files in manually because we don't want colcon to rebuild the project every time assets change. 
+# Adding media
+You will have to create the media directory and transfer image and audio files in manually because we don't want colcon to rebuild the project every time assets change. 
+
+The robot assets are stored in this repo and you will have to put them in a specific location so the robot code can find them. 
 
 1. From your shell terminal: `mv <repo_root>/robot_assets ~`
 
