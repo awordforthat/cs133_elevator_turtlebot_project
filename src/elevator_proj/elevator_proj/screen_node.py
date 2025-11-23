@@ -12,11 +12,6 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
-import sys
-
-print("Running from:", sys.executable)
-print("Script path:", __file__)
-
 
 class ScreenNode(Node):
     def __init__(self):
