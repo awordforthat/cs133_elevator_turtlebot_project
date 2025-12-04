@@ -33,7 +33,7 @@ class ControlNode(Node):
         if FEEDBACK_SUCCESS in msg.data:
             recording_message = String()
             recording_message.data = AUDIO_CONTROL_START
-            self.recording_publisher.publish()
+            # self.recording_publisher.publish()
 
 
 def main(args=None):

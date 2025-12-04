@@ -44,10 +44,13 @@ class ScreenNode(Node):
 
     def callback(self, msg):
         self.get_logger().info(f"Screen node heard: {msg.data}")
-        if msg.data == COMMAND_AFFECT_HAPPY:
+        print(COMMAND_AFFECT_HAPPY, msg.data, COMMAND_AFFECT_HAPPY in msg.data)
+        if COMMAND_AFFECT_HAPPY in msg.data:
             self.current_image = self.happy_image
-        elif msg.data == COMMAND_AFFECT_SAD:
+            print("HAPPY!")
+        elif COMMAND_AFFECT_SAD in msg.data:
             self.current_image = self.sad_image
+            print("SAD :(")
 
     def refresh(self):
         cv2.waitKey(1)

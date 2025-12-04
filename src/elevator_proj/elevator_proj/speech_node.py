@@ -33,6 +33,8 @@ class SpeechNode(Node):
         self.happy_normal_audio = AudioSegment.from_file(
             f"{assets_path}/happy_normal.mp3"
         )
+        self.get_logger().info(f"file path: {assets_path}/happy_normal.mp3")
+
         self.sad_normal_audio = AudioSegment.from_file(f"{assets_path}/sad_normal.mp3")
         self.happy_unusual_audio = AudioSegment.from_file(
             f"{assets_path}/happy_unusual.mp3"
@@ -56,12 +58,17 @@ class SpeechNode(Node):
         response = FEEDBACK_SUCCESS
         # These play commands are blocking.
         if is_happy and is_normal:
+            print("playing happy normal")
             play(self.happy_normal_audio)
         elif is_happy and is_unusual:
+            print("playing happy weird")
+
             play(self.happy_unusual_audio)
         elif is_sad and is_normal:
+            print("playing sad normal")
             play(self.sad_normal_audio)
         elif is_sad and is_unusual:
+            print("playing sad weird")
             play(self.sad_unusual_audio)
         else:
             response = FEEDBACK_NONE

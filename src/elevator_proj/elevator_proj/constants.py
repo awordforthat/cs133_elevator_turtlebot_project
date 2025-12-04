@@ -3,13 +3,13 @@ FEEDBACK_TOPIC = "feedback"
 HRI_TOPIC = "hri"
 TEST_TOPIC = "test"
 
-COMMAND_AFFECT_HAPPY = "happy"
-COMMAND_AFFECT_SAD = "sad"
+COMMAND_AFFECT_HAPPY = "h"
+COMMAND_AFFECT_SAD = "s"
 
-COMMAND_NORMAL = "normal"
-COMMAND_UNUSUAL = "unusual"
+COMMAND_NORMAL = "n"
+COMMAND_UNUSUAL = "w"
 
-ASSET_FOLDER = "~/robot_assets"
+ASSET_FOLDER = "~/ros2_kobuki_ws/robot_assets"
 IMAGES_SUBDIR = "images"
 AUDIO_SUBDIR = "audio"
 

@@ -145,3 +145,30 @@ The robot assets are stored in this repo and you will have to put them in a spec
 - Document running the telop/sim project
 - fix the double publish bug in the control node
 - add diagram showing relationships between nodes and topics
+
+
+
+# Panic notes:
+- Source these in order: `source /opt/ros/humble/setup.bash`
+`source ~/ros2_kobuki_ws/install/setup.bash`
+
+
+
+
+# Day of - how to run
+1. Open WSL 
+2. cd to ~/ros2_kobuki_ws/
+3. Run `source /opt/ros/humble/setup.bash`
+4. Run `source ~/ros2_kobuki_ws/install/setup.bash`
+5. Attach the USB port to WSL, from Powershell as admin:
+    - usbipd list
+    - usbipd bind --busid 2-6
+    - (admin) usbipd attach --busid 2-6 --wsl
+6. Run the elevator project:  `ros2 launch elevator_proj launch_elevator_proj.py`
+7. Run the test node: `ros2 run elevator_proj test_node`
+
+Commands:
+- hn = Happy Normal
+- sn = Sad Normal
+- hw = Happy Weird
+- sw = Sad Weird

@@ -51,11 +51,22 @@ def generate_launch_description():
                 output="screen",
             ),
             Node(
+                package="kobuki_node",
+                executable="kobuki_ros_node",
+                name="kobuki",
+                parameters=[
+                    {"device_port": "/dev/ttyUSB0"},
+                ],
+                output="screen",
+            ),
+            Node(
                 package="teleop_twist_keyboard",
                 executable="teleop_twist_keyboard",
                 name="teleop",
-                output="screen",
                 prefix="xterm -e",
+                remappings=[
+                    ("/cmd_vel", "/commands/velocity"),
+                ],
             ),
         ]
     )
