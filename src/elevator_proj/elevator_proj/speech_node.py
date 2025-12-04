@@ -43,6 +43,9 @@ class SpeechNode(Node):
             f"{assets_path}/sad_unusual.mp3"
         )
 
+        self.happy_sfx = AudioSegment.from_file(f"{assets_path}/happy-robot-noise.mp3")
+        self.sad_sfx = AudioSegment.from_file(f"{assets_path}/sad-robot-noise.mp3")
+
     def callback(self, msg):
         # TODO(echarles): figure out QoS so messages that come in during the
         # speaking phase don't interrupt the speech. Maybe we want a "cancel" behavior?
@@ -59,16 +62,19 @@ class SpeechNode(Node):
         # These play commands are blocking.
         if is_happy and is_normal:
             print("playing happy normal")
+            play(self.happy_sfx)
             play(self.happy_normal_audio)
         elif is_happy and is_unusual:
             print("playing happy weird")
-
+            play(self.happy_sfx)
             play(self.happy_unusual_audio)
         elif is_sad and is_normal:
             print("playing sad normal")
+            play(self.sad_sfx)
             play(self.sad_normal_audio)
         elif is_sad and is_unusual:
             print("playing sad weird")
+            play(self.sad_sfx)
             play(self.sad_unusual_audio)
         else:
             response = FEEDBACK_NONE
