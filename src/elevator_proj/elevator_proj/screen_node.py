@@ -1,7 +1,9 @@
 import cv2
 import os
+from screeninfo import get_monitors
 
 from elevator_proj.constants import (
+    COMMAND_QR,
     HRI_TOPIC,
     COMMAND_AFFECT_HAPPY,
     COMMAND_AFFECT_SAD,
@@ -26,6 +28,7 @@ class ScreenNode(Node):
         self.current_image = None
         self.happy_image = cv2.imread(f"{assets_path}/happy.png")
         self.sad_image = cv2.imread(f"{assets_path}/sad.png")
+        self.qr_code = cv2.imread(f"{assets_path}/qr-code.png")
 
         if self.happy_image is None:
             raise FileNotFoundError(f"happy image not found in folder {assets_path}")
@@ -33,8 +36,11 @@ class ScreenNode(Node):
         if self.sad_image is None:
             raise FileNotFoundError(f"sad image not found in folder {assets_path}")
 
+        if self.qr_code is None:
+            raise FileNotFoundError(f"qr code not found in folder {assets_path}")
+
         cv2.namedWindow("Display", cv2.WINDOW_NORMAL)
-        cv2.moveWindow("Display", 0, 0)
+        cv2.setWindowProperty("img", cv2.WND_PROP_TOPMOST, 1)
 
         h, w = self.happy_image.shape[:2]
         cv2.resizeWindow("Display", w, h)
@@ -44,13 +50,14 @@ class ScreenNode(Node):
 
     def callback(self, msg):
         self.get_logger().info(f"Screen node heard: {msg.data}")
-        print(COMMAND_AFFECT_HAPPY, msg.data, COMMAND_AFFECT_HAPPY in msg.data)
         if COMMAND_AFFECT_HAPPY in msg.data:
             self.current_image = self.happy_image
             print("HAPPY!")
         elif COMMAND_AFFECT_SAD in msg.data:
             self.current_image = self.sad_image
             print("SAD :(")
+        elif COMMAND_QR in msg.data:
+            self.current_image = self.qr_code
 
     def refresh(self):
         cv2.waitKey(1)
