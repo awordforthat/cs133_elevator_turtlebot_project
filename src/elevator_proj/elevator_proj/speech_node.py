@@ -9,6 +9,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 from elevator_proj.constants import (
+    COMMAND_THANKYOU,
     FEEDBACK_NONE,
     FEEDBACK_SUCCESS,
     HRI_TOPIC,
@@ -33,8 +34,6 @@ class SpeechNode(Node):
         self.happy_normal_audio = AudioSegment.from_file(
             f"{assets_path}/happy_normal.mp3"
         )
-        self.get_logger().info(f"file path: {assets_path}/happy_normal.mp3")
-
         self.sad_normal_audio = AudioSegment.from_file(f"{assets_path}/sad_normal.mp3")
         self.happy_unusual_audio = AudioSegment.from_file(
             f"{assets_path}/happy_unusual.mp3"
@@ -42,6 +41,14 @@ class SpeechNode(Node):
         self.sad_unusual_audio = AudioSegment.from_file(
             f"{assets_path}/sad_unusual.mp3"
         )
+        self.thankyou_happy_audio = AudioSegment.from_file(
+            f"{assets_path}/thankyou_happy.mp3"
+        )
+        self.thankyou_sad_audio = AudioSegment.from_file(
+            f"{assets_path}/thankyou_sad.mp3"
+        )
+        self.tag_happy_audio = AudioSegment.from_file(f"{assets_path}/happy-tag.mp3")
+        self.tag_sad_audio = AudioSegment.from_file(f"{assets_path}/sad-tag.mp3")
 
         self.happy_sfx = AudioSegment.from_file(f"{assets_path}/happy-robot-noise.mp3")
         self.sad_sfx = AudioSegment.from_file(f"{assets_path}/sad-robot-noise.mp3")
@@ -57,6 +64,7 @@ class SpeechNode(Node):
         is_sad = COMMAND_AFFECT_SAD in msg.data
         is_normal = COMMAND_NORMAL in msg.data
         is_unusual = COMMAND_UNUSUAL in msg.data
+        is_thankyou = COMMAND_THANKYOU in msg.data
 
         response = FEEDBACK_SUCCESS
         # These play commands are blocking.
@@ -76,6 +84,14 @@ class SpeechNode(Node):
             print("playing sad weird")
             play(self.sad_sfx)
             play(self.sad_unusual_audio)
+        elif is_thankyou and is_happy:
+            print("playing thank you happy")
+            play(self.thankyou_happy_audio)
+            play(self.tag_happy_audio)
+        elif is_thankyou and is_sad:
+            print("playing thank you sad")
+            play(self.thankyou_sad_audio)
+            play(self.tag_sad_audio)
         else:
             response = FEEDBACK_NONE
 
