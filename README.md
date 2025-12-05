@@ -172,3 +172,6 @@ Commands:
 - sn = Sad Normal
 - hw = Happy Weird
 - sw = Sad Weird
+- tyh = Thank you happy
+- tys = Thank you sad
+- q = show QR code
