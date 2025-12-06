@@ -191,3 +191,4 @@ Commands:
 - tyh = Thank you happy
 - tys = Thank you sad
 - q = show QR code
+- c = clear screen

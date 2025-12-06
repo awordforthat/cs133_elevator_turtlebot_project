@@ -1,6 +1,7 @@
-import cv2
 import os
-from screeninfo import get_monitors
+
+import cv2
+import numpy as np
 
 from elevator_proj.constants import (
     COMMAND_QR,
@@ -9,6 +10,7 @@ from elevator_proj.constants import (
     COMMAND_AFFECT_SAD,
     ASSET_FOLDER,
     IMAGES_SUBDIR,
+    COMMAND_CLEAR,
 )
 import rclpy
 from rclpy.node import Node
@@ -30,6 +32,9 @@ class ScreenNode(Node):
         self.sad_image = cv2.imread(f"{assets_path}/sad.png")
         self.qr_code = cv2.imread(f"{assets_path}/qr-code.png")
 
+        h, w = self.happy_image.shape[:2]
+        self.blank = np.zeros((h, w, 3), dtype=np.uint8)
+
         if self.happy_image is None:
             raise FileNotFoundError(f"happy image not found in folder {assets_path}")
 
@@ -42,7 +47,6 @@ class ScreenNode(Node):
         cv2.namedWindow("Display", cv2.WINDOW_NORMAL)
         cv2.setWindowProperty("img", cv2.WND_PROP_TOPMOST, 1)
 
-        h, w = self.happy_image.shape[:2]
         cv2.resizeWindow("Display", w, h)
 
         self.get_logger().info("loaded files")
@@ -58,6 +62,8 @@ class ScreenNode(Node):
             print("SAD :(")
         elif COMMAND_QR in msg.data:
             self.current_image = self.qr_code
+        elif COMMAND_CLEAR in msg.data:
+            self.current_image = self.blank
 
     def refresh(self):
         cv2.waitKey(1)

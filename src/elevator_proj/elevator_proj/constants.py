@@ -8,6 +8,9 @@ COMMAND_AFFECT_SAD = "s"
 
 COMMAND_NORMAL = "n"
 COMMAND_UNUSUAL = "w"
+COMMAND_QR = "q"
+COMMAND_CLEAR = "c"
+COMMAND_THANKYOU = "ty"
 
 ASSET_FOLDER = "~/ros2_kobuki_ws/robot_assets"
 IMAGES_SUBDIR = "images"
