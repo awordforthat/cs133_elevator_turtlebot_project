@@ -139,19 +139,35 @@ You will have to create the media directory and transfer image and audio files i
 
 The robot assets are stored in this repo and you will have to put them in a specific location so the robot code can find them. 
 
-1. From your shell terminal: `mv <repo_root>/robot_assets ~`
+From your shell terminal in WSL: `mv <repo_root>/robot_assets ~/ros2_kobuki_ws/robot_assets`
+
+There are separate folders for audio and video, but that's just for developer experience, it doesn't affect anything technically.
+
+# SSHing into the WSL instance
+
+During the experiment, it's nice to be able to send commands from a computer that's not strapped to the robot. To do this, we used [Tailscale](https://tailscale.com/). The goal is to be able to SSH into the WSL instance from some second computer.
+
+1. Set up tailscale in Windows first
+    - Download the installer here: https://tailscale.com/download
+    - Create an account and log in to create the tailnet
+2. Install Tailscale in WSL:
+    - `curl -fsSL https://tailscale.com/install.sh | sh`
+    - `sudo tailscale up`
+3. Enable SSH in WSL:
+    - `sudo apt update`
+    - `sudo apt install openssh-server`
+    - `sudo systemctl enable ssh`
+    - `sudo systemctl start ssh`
+4. Install a tailscale client on the second computer, logging in as the same user as in (1)
+5. Get the IP of the WSL instance from the Tailscale admin panel.
+6. From the second computer, SSH to the WSL instance: `ssh <wsluser>@<wslIP>`
+7. Now from the second computer you can source the bash.install file and launch the elevator project.
+
+There is currently a problem with teleop over SSH, so really you can only send text commands :(. The next troubleshooting step is to try and run the `teleop_twist_keyboard` app directly: `ros2 run teleop_twist_keyboard teleop_twist_keyboard`
 
 #TODOs
 - Document running the telop/sim project
-- fix the double publish bug in the control node
 - add diagram showing relationships between nodes and topics
-
-
-
-# Panic notes:
-- Source these in order: `source /opt/ros/humble/setup.bash`
-`source ~/ros2_kobuki_ws/install/setup.bash`
-
 
 
 
